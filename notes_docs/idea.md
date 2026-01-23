@@ -57,7 +57,7 @@ Checks: (IN TOTAL ~ 52)
 	- Win with no pawn move 3+
 	- "BOTEZ GAMBIT" Win after sacrificing a queen (for free). 4+ (requires queen)
 	- moving out (have princess and empress as far from each other as possible.) 4+
-	- spell PEPPER (using pieces starting letter) 4+
+	- "How far we've come" spell out REMEMBER (using pieces starting letter) 4+ (OR PEPPER, non-essential)
 (see [https://www.drawbackchess.com](https://www.drawbackchess.com/))
 
 
