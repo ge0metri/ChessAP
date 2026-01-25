@@ -179,7 +179,7 @@ static func is_valid_pawn_move(board: Array, from: Vector2i, to: Vector2i,
 	
 	return false
 
-static func is_valid_en_passant(board: Array, from: Vector2i, to: Vector2i, 
+static func is_valid_en_passant(_board: Array, from: Vector2i, to: Vector2i, 
 								 piece, move_history: Array) -> bool:
 	if move_history.is_empty():
 		return false
@@ -216,7 +216,7 @@ static func is_valid_king_move(board: Array, from: Vector2i, to: Vector2i,
 	return false
 
 static func can_castle(board: Array, from: Vector2i, to: Vector2i, 
-						piece, move_history: Array) -> bool:
+						piece, _move_history: Array) -> bool:
 	# King must not have moved
 	if piece.has_moved:
 		return false
