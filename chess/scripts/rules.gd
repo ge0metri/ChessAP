@@ -82,7 +82,7 @@ const PIECE_VALUES = {
 static func is_valid_position(pos: Vector2i) -> bool:
 	return pos.x >= 0 and pos.x < BOARD_SIZE and pos.y >= 0 and pos.y < BOARD_SIZE
 
-static func is_move_legal(board: Array, from: Vector2i, to: Vector2i, 
+static func is_move_legal(board: Board, from: Vector2i, to: Vector2i, 
 						   move_history: Array, unlocked_moves: Dictionary) -> bool:
 	if not is_valid_position(from) or not is_valid_position(to):
 		return false
@@ -90,11 +90,11 @@ static func is_move_legal(board: Array, from: Vector2i, to: Vector2i,
 	if from == to:
 		return false
 	
-	var piece = board[from.y][from.x]
+	var piece = board.get_piece(from)
 	if piece == null:
 		return false
 	
-	var target = board[to.y][to.x]
+	var target = board.get_piece(to)
 	# Can't capture own pieces
 	if target != null and target.color == piece.color:
 		return false
@@ -109,7 +109,7 @@ static func is_move_legal(board: Array, from: Vector2i, to: Vector2i,
 	
 	return true
 
-static func is_valid_piece_move(board: Array, from: Vector2i, to: Vector2i, 
+static func is_valid_piece_move(board: Board, from: Vector2i, to: Vector2i, 
 								 piece, move_history: Array, unlocked_moves: Dictionary) -> bool:
 	match piece.type:
 		PieceType.PAWN:
@@ -151,7 +151,7 @@ static func is_valid_piece_move(board: Array, from: Vector2i, to: Vector2i,
 # PIECE-SPECIFIC MOVEMENT VALIDATION
 # ============================================================================
 
-static func is_valid_pawn_move(board: Array, from: Vector2i, to: Vector2i, 
+static func is_valid_pawn_move(board: Board, from: Vector2i, to: Vector2i, 
 								piece, move_history: Array, unlocked_moves: Dictionary) -> bool:
 	var direction = -1 if piece.color == COLOR.WHITE else 1
 	var start_rank = 6 if piece.color == COLOR.WHITE else 1
@@ -159,17 +159,17 @@ static func is_valid_pawn_move(board: Array, from: Vector2i, to: Vector2i,
 	
 	# Forward move (one square)
 	if delta.x == 0 and delta.y == direction:
-		return board[to.y][to.x] == null
+		return board.get_piece(Vector2i(to.x,to.y)) == null
 	
 	# Forward move (two squares) - check if unlocked
 	if unlocked_moves.get(UNLOCKABLE_MOVES.PAWN_DOUBLE_MOVE, false):
 		if delta.x == 0 and delta.y == direction * 2 and from.y == start_rank:
 			var middle = Vector2i(from.x, from.y + direction)
-			return board[middle.y][middle.x] == null and board[to.y][to.x] == null
+			return board.get_piece(Vector2i(middle.x,middle.y)) == null and board.get_piece(Vector2i(to.x,to.y)) == null
 	
 	# Capture
 	if abs(delta.x) == 1 and delta.y == direction:
-		var target = board[to.y][to.x]
+		var target = board.get_piece(Vector2i(to.x,to.y))
 		if target != null and target.color != piece.color:
 			return true
 		
@@ -179,7 +179,7 @@ static func is_valid_pawn_move(board: Array, from: Vector2i, to: Vector2i,
 	
 	return false
 
-static func is_valid_en_passant(_board: Array, from: Vector2i, to: Vector2i, 
+static func is_valid_en_passant(_board: Board, from: Vector2i, to: Vector2i, 
 								 piece, move_history: Array) -> bool:
 	if move_history.is_empty():
 		return false
@@ -200,7 +200,7 @@ static func is_valid_en_passant(_board: Array, from: Vector2i, to: Vector2i,
 	# Check if target square is correct
 	return to.y == from.y + direction and to.x == last_move.to.x
 
-static func is_valid_king_move(board: Array, from: Vector2i, to: Vector2i, 
+static func is_valid_king_move(board: Board, from: Vector2i, to: Vector2i, 
 								piece, move_history: Array, unlocked_moves: Dictionary) -> bool:
 	var delta = to - from
 	
@@ -215,7 +215,7 @@ static func is_valid_king_move(board: Array, from: Vector2i, to: Vector2i,
 	
 	return false
 
-static func can_castle(board: Array, from: Vector2i, to: Vector2i, 
+static func can_castle(board: Board, from: Vector2i, to: Vector2i, 
 						piece, _move_history: Array) -> bool:
 	# King must not have moved
 	if piece.has_moved:
@@ -235,7 +235,7 @@ static func can_castle(board: Array, from: Vector2i, to: Vector2i,
 	var start_x = min(from.x, rook_x) + 1
 	var end_x = max(from.x, rook_x)
 	for x in range(start_x, end_x):
-		if board[from.y][x] != null:
+		if board.get_piece(Vector2i(x,from.y)) != null:
 			return false
 	
 	# King cannot be in check, pass through check, or end in check
@@ -252,7 +252,7 @@ static func can_castle(board: Array, from: Vector2i, to: Vector2i,
 	
 	return true
 
-static func is_valid_sliding_move(board: Array, from: Vector2i, to: Vector2i, 
+static func is_valid_sliding_move(board: Board, from: Vector2i, to: Vector2i, 
 								   directions: Array) -> bool:
 	var delta = to - from
 	
@@ -289,7 +289,7 @@ static func is_in_direction(from: Vector2i, to: Vector2i, directions: Array, max
 	
 	return false
 
-#static func is_valid_cannon_move(board: Array, from: Vector2i, to: Vector2i) -> bool:
+#static func is_valid_cannon_move(board: Board, from: Vector2i, to: Vector2i) -> bool:
 	#var delta = to - from
 	#
 	## Must move orthogonally
@@ -305,7 +305,7 @@ static func is_in_direction(from: Vector2i, to: Vector2i, directions: Array, max
 			#pieces_between += 1
 		#current += direction
 	#
-	#var target = board[to.y][to.x]
+	#var target = board.get_piece(Vector2i(to.x,to.y))
 	#
 	## Non-capturing: no pieces between
 	#if target == null:
@@ -318,11 +318,11 @@ static func is_in_direction(from: Vector2i, to: Vector2i, directions: Array, max
 # CHECK & CHECKMATE
 # ============================================================================
 
-static func is_in_check(board: Array, king_pos: Vector2i, player_color: int) -> bool:
+static func is_in_check(board: Board, king_pos: Vector2i, player_color: int) -> bool:
 	# Find if any enemy piece can attack the king position
 	for y in range(BOARD_SIZE):
 		for x in range(BOARD_SIZE):
-			var piece = board[y][x]
+			var piece = board.get_piece(Vector2i(x,y))
 			if piece != null and piece.color != player_color:
 				var from = Vector2i(x, y)
 				# Check if this piece can attack king position (ignore check validation)
@@ -330,7 +330,7 @@ static func is_in_check(board: Array, king_pos: Vector2i, player_color: int) -> 
 					return true
 	return false
 
-static func can_piece_attack(board: Array, from: Vector2i, to: Vector2i, piece) -> bool:
+static func can_piece_attack(board: Board, from: Vector2i, to: Vector2i, piece) -> bool:
 	# Similar to is_valid_piece_move but without recursive check validation
 	# Used to detect checks without infinite recursion
 	match piece.type:
@@ -362,29 +362,28 @@ static func can_piece_attack(board: Array, from: Vector2i, to: Vector2i, piece) 
 			#return is_valid_cannon_move(board, from, to)
 	return false
 
-static func would_be_in_check_after_move(board: Array, from: Vector2i, to: Vector2i, color: int) -> bool:
+static func would_be_in_check_after_move(board: Board, from: Vector2i, to: Vector2i, color: int) -> bool:
 	# Simulate the move
 	var board_copy = clone_board(board)
-	var piece = board_copy[from.y][from.x]
-	var captured = board_copy[to.y][to.x]
+	var piece = board_copy.get_piece(from)
+	var captured = board_copy.get_piece(to)
 	
-	board_copy[to.y][to.x] = piece
-	board_copy[from.y][from.x] = null
+	board_copy.move_piece(from, to)
 	
 	# Handle en passant capture
 	if piece.type == PieceType.PAWN and to.x != from.x and captured == null:
 		var capture_y = from.y
-		board_copy[capture_y][to.x] = null
+		board_copy.set_piece(Vector2i(to.x, capture_y), null)
 	
 	# Find king position
 	var king_pos = to if piece.type == PieceType.KING else find_king(board_copy, color)
 	
 	return is_in_check(board_copy, king_pos, color)
 
-static func would_be_in_check_at_position(board: Array, pos: Vector2i, color: int) -> bool:
+static func would_be_in_check_at_position(board: Board, pos: Vector2i, color: int) -> bool:
 	return is_in_check(board, pos, color)
 
-static func is_checkmate(board: Array, player_color: int, move_history: Array, unlocked_moves: Dictionary) -> bool:
+static func is_checkmate(board: Board, player_color: int, move_history: Array, unlocked_moves: Dictionary) -> bool:
 	var king_pos = find_king(board, player_color)
 	
 	if not is_in_check(board, king_pos, player_color):
@@ -393,7 +392,7 @@ static func is_checkmate(board: Array, player_color: int, move_history: Array, u
 	# Check if any legal move exists
 	return not has_legal_moves(board, player_color, move_history, unlocked_moves)
 
-static func is_stalemate(board: Array, player_color: int, move_history: Array, unlocked_moves: Dictionary) -> bool:
+static func is_stalemate(board: Board, player_color: int, move_history: Array, unlocked_moves: Dictionary) -> bool:
 	var king_pos = find_king(board, player_color)
 	
 	if is_in_check(board, king_pos, player_color):
@@ -402,10 +401,10 @@ static func is_stalemate(board: Array, player_color: int, move_history: Array, u
 	# No legal moves but not in check
 	return not has_legal_moves(board, player_color, move_history, unlocked_moves)
 
-static func has_legal_moves(board: Array, player_color: int, move_history: Array, unlocked_moves: Dictionary) -> bool:
+static func has_legal_moves(board: Board, player_color: int, move_history: Array, unlocked_moves: Dictionary) -> bool:
 	for y in range(BOARD_SIZE):
 		for x in range(BOARD_SIZE):
-			var piece = board[y][x]
+			var piece = board.get_piece(Vector2i(x,y))
 			if piece != null and piece.color == player_color:
 				var from = Vector2i(x, y)
 				var legal_moves = get_legal_moves(board, from, move_history, unlocked_moves)
@@ -417,7 +416,7 @@ static func has_legal_moves(board: Array, player_color: int, move_history: Array
 # UTILITY FUNCTIONS
 # ============================================================================
 
-static func get_legal_moves(board: Array, position: Vector2i, move_history: Array, unlocked_moves: Dictionary) -> Array[Vector2i]:
+static func get_legal_moves(board: Board, position: Vector2i, move_history: Array, unlocked_moves: Dictionary) -> Array[Vector2i]:
 	var legal_moves: Array[Vector2i] = []
 	
 	for y in range(BOARD_SIZE):
@@ -428,15 +427,15 @@ static func get_legal_moves(board: Array, position: Vector2i, move_history: Arra
 	
 	return legal_moves
 
-static func find_king(board: Array, color: int) -> Vector2i:
+static func find_king(board: Board, color: int) -> Vector2i:
 	for y in range(BOARD_SIZE):
 		for x in range(BOARD_SIZE):
-			var piece = board[y][x]
+			var piece = board.get_piece(Vector2i(x,y))
 			if piece != null and piece.type == PieceType.KING and piece.color == color:
 				return Vector2i(x, y)
 	return Vector2i(-1, -1)  # Should never happen in valid game
 
-static func is_path_clear(board: Array, from: Vector2i, to: Vector2i) -> bool:
+static func is_path_clear(board: Board, from: Vector2i, to: Vector2i) -> bool:
 	var delta = (to - from).sign()
 	var current = from + delta
 	
@@ -447,10 +446,8 @@ static func is_path_clear(board: Array, from: Vector2i, to: Vector2i) -> bool:
 	
 	return true
 
-static func clone_board(board: Array) -> Array:
-	var new_board = []
-	for row in board:
-		new_board.append(row.duplicate())
+static func clone_board(board: Board) -> Board:
+	var new_board = board.clone()
 	return new_board
 
 static func is_promotion_square(position: Vector2i, piece) -> bool:
@@ -460,11 +457,11 @@ static func is_promotion_square(position: Vector2i, piece) -> bool:
 	var promotion_rank = 0 if piece.color == COLOR.WHITE else 7
 	return position.y == promotion_rank
 
-static func calculate_material_value(board: Array, color: int) -> int:
+static func calculate_material_value(board: Board, color: int) -> int:
 	var total = 0
 	for y in range(BOARD_SIZE):
 		for x in range(BOARD_SIZE):
-			var piece = board[y][x]
+			var piece = board.get_piece(Vector2i(x,y))
 			if piece != null and piece.color == color:
 				total += PIECE_VALUES.get(piece.type, 0)
 	return total

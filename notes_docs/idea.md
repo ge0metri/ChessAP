@@ -61,7 +61,7 @@ Checks: (IN TOTAL ~ )
 	- Look at you go! Get to 100 moves 2+
 	- The one and only fork. You know the one 2+
 	- battle of the bishops. Have two bishops see each other 2+
-	- win a game only moving moving pawn-classes (may not move promoted pieces) 2+
+	- win a game only moving pawn-classes (may not move promoted pieces) 2+
 	- Connect 4 (pawns) 2+ 
 	- Rook Tour - Move a rook to every rank 2+
 	- Win without ever checking the opponet (not including check mate). 2+
