@@ -2,8 +2,8 @@ namespace ChessAP.chess.fairybot.Framework
 {
     public enum Piece
     {
-    NONE,
-	// Standard pieces
+    NONE = 0,
+	// White pieces
 	PAWN, 
     ROOK, 
     KNIGHT,
@@ -17,5 +17,6 @@ namespace ChessAP.chess.fairybot.Framework
 	MAN,         // King-like but can be captured
 	PRINCESS,    // Bishop + Knight
 	EMPRESS,     // Rook + Knight
+
     }
 }

@@ -2,7 +2,7 @@ namespace ChessAP.chess.fairybot.Framework
 {
     public enum Color
     {
-        BLACK,
-        WHITE
+        WHITE = 0,
+        BLACK = 1
     }
 }

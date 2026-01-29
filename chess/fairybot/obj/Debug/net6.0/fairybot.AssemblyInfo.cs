@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fairybot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b4bd6c10d2afac9b1ad87ddd8dadfb9cf226e68")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c891f747b208eb6398c23db9eec6699e0e596eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("fairybot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fairybot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

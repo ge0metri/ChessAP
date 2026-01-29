@@ -84,6 +84,9 @@ Is princess / empress progressive?
 
 (see [https://www.drawbackchess.com](https://www.drawbackchess.com/))
 
+Link to standard chess board notation: https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+
+
 BACKLOG:
 	- Achievement checker
 	- chess bot :o 

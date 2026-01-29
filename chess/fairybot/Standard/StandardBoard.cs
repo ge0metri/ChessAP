@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using ChessAP.chess.fairybot.Framework;
@@ -11,21 +12,24 @@ namespace ChessAP.chess.fairybot.Standard
 {
     public class StandardBoard : Board
     {
-        private Piece[,] currentBoard;
+        private ColoredPiece[,] currentBoard;
         
-        public StandardBoard()
+        public StandardBoard(string piecePositionFEN)
         {
-            currentBoard = new Piece[8,8];
+            currentBoard = new ColoredPiece[8,8];
         }
 
-        public (Piece, Color) getPieceOnSquare(int colomn, int row)
+        public ColoredPiece getPieceOnSquare(int colomn, int row)
         {
-            throw new NotImplementedException();
+            return currentBoard[colomn,row];
         }
 
-        public Piece movePiece(int colomn_from, int row_from, int colomn_to, int row_to)
+        public ColoredPiece movePiece(int colomn_from, int row_from, int colomn_to, int row_to)
         {
-            throw new NotImplementedException();
+            ColoredPiece pieceToMove = getPieceOnSquare(colomn_from, row_from);
+            setPieceOnSquare(colomn_from, row_from, ColoredPiece.NONE);
+            setPieceOnSquare(colomn_to, row_to, pieceToMove);
+            return pieceToMove;
         }
 
         public void print()
@@ -33,14 +37,16 @@ namespace ChessAP.chess.fairybot.Standard
             throw new NotImplementedException();
         }
 
-        public Piece removePieceFromSquare(int colomn, int row)
+        public ColoredPiece removePieceFromSquare(int colomn, int row)
         {
-            throw new NotImplementedException();
+            ColoredPiece pieceToRemove = getPieceOnSquare(colomn, row);
+            setPieceOnSquare(colomn, row, ColoredPiece.NONE);
+            return pieceToRemove;
         }
 
-        public void setPieceOnSquare(int colomn, int row, Piece piece, Color color)
+        public void setPieceOnSquare(int colomn, int row, ColoredPiece piece)
         {
-            throw new NotImplementedException();
+            currentBoard[colomn, row] = piece;
         }
     }
 }
