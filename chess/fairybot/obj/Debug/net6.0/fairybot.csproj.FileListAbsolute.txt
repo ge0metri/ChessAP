@@ -1,0 +1,15 @@
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\bin\Debug\net6.0\fairybot.deps.json
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\bin\Debug\net6.0\fairybot.dll
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\bin\Debug\net6.0\fairybot.pdb
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.AssemblyInfoInputs.cache
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.AssemblyInfo.cs
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.csproj.CoreCompileInputs.cache
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.sourcelink.json
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.dll
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\refint\fairybot.dll
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.pdb
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\ref\fairybot.dll
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\bin\Debug\net6.0\fairybot.exe
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\bin\Debug\net6.0\fairybot.runtimeconfig.json
+C:\Users\Magnus\Desktop\Programing\ChessBot\ChessAP\chess\fairybot\obj\Debug\net6.0\fairybot.genruntimeconfig.cache
