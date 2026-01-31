@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj": {}
+    "c:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj": {
+    "c:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj",
+        "projectUniqueName": "c:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj",
         "projectName": "fairybot",
-        "projectPath": "C:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj",
+        "projectPath": "c:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj",
         "packagesPath": "C:\\Users\\Magnus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\obj\\",
+        "outputPath": "c:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

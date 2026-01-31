@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T2qs1gWnhpg=",
+  "dgSpecHash": "r1dB2AwxjrA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj",
+  "projectFilePath": "c:\\Users\\Magnus\\Desktop\\Programing\\ChessBot\\ChessAP\\chess\\fairybot\\fairybot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Magnus\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
     "C:\\Users\\Magnus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
