@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChessAP.chess.fairybot.Framework
-
+{
 /*
     Board indexing:
            A    B    C    D    E    F    G    H
@@ -29,12 +29,25 @@ namespace ChessAP.chess.fairybot.Framework
     Matching with FEN position incoding.
 */
 
-{
+
     public interface FENHandler
     {
+        /// <summary>
+        /// Takes a string describing a position in the FEN standard https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+        /// and generates bitmaps of what piece is in what position including color maps, Dictionaries with positions of each type
+        /// of piece and what is on each square. Also updates posible castling information, en passant and player in turn.
+        /// </summary>
+        /// <param name="fenString">FEN encoded string of the position</param>
         void setCurrentFEN(string fenString);
-        ulong[] generateBitMaps();
-        ulong[] generateMoveMaps();
+
+        /// <summary>
+        /// Generates all posible moves for the current position
+        /// </summary>
+        /// <returns>List of all posible moves using (from, to) notation</returns>
+        List<(int, int)> generateMoves();
+
+        
+
         string generateMoveFEN(int from, int to);
 
     }
