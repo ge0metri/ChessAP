@@ -11,8 +11,12 @@ namespace ChessAP.chess.fairybot.main
 
         static void test()
         {
-            ulong[] L = new ulong[20];
-            Console.WriteLine(L[4]);
+        
+            char c = '1';
+        
+        
+            Console.WriteLine((int) c);
+        
         }
 
         static void actualMain()

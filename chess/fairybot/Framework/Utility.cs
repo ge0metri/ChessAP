@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace ChessAP.chess.fairybot.Framework
 {
-    public class Utility
+    public static class Utility
     {
-        int mapIndex(ColoredPiece coloredPiece)
+        public static int mapIndex(ColoredPiece coloredPiece)
         {
             return (int) coloredPiece;
         }
 
-        int mapIndex(Color color)
+        public static int mapIndex(Color color)
         {
             return ((int) color) << 4;
         }
 
-        Color colorOfPiece(ColoredPiece coloredPiece)
+        public static Color colorOfPiece(ColoredPiece coloredPiece)
         {
             return (Color) ((int) coloredPiece >> 4);
         }

@@ -11,5 +11,5 @@ Piece abrieviation:
     L: Elephant
     C: Camel
     M: Man
-    R: Princess
+    S: Princess
     E: Empress
