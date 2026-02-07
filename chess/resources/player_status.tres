@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerStatus" format=3 uid="uid://co4hwhncg0bxt"]
+
+[ext_resource type="Script" uid="uid://cakndjmcf3cxf" path="res://chess/scripts/player_status.gd" id="1_dqy6i"]
+
+[resource]
+script = ExtResource("1_dqy6i")
+metadata/_custom_type_script = "uid://cakndjmcf3cxf"

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cs8tqwku7t5a3"]
+
+[ext_resource type="Texture2D" uid="uid://glefjbkskjfc" path="res://chess/assets/Chess_adt45.svg" id="1_attm4"]
+[ext_resource type="Script" uid="uid://synsy3hrh15j" path="res://chess/scenes/chess_piece.gd" id="1_kbgdq"]
+
+[node name="ChessPiece" type="Node2D" unique_id=948030166]
+script = ExtResource("1_kbgdq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=327115597]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_attm4")

@@ -28,13 +28,13 @@ Archipelago="*res://godot_ap/autoloads/archipelago.tscn"
 
 [display]
 
-window/size/viewport_width=750
-window/size/viewport_height=400
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/extend_to_title=true
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/subwindows/embed_subwindows=false
-window/stretch/aspect="expand"
+window/stretch/mode="viewport"
 
 [file_customization]
 
@@ -52,3 +52,16 @@ import/blender/enabled=false
 timers/tooltip_delay_sec=0.2
 theme/custom="res://godot_ap/ui/themes/dark_theme.tres"
 theme/custom_font="uid://bsf22ltaya6h0"
+
+[input]
+
+mouse_left={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(234, 21),"global_position":Vector2(246, 81),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+debug1={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"key_label":0,"unicode":49,"location":0,"echo":false,"script":null)
+]
+}

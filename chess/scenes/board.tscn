@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://duhvpsnimx6k"]
+
+[ext_resource type="Script" uid="uid://ca7207qxw6070" path="res://chess/scripts/board.gd" id="1_yylkj"]
+[ext_resource type="Texture2D" uid="uid://d2dimppv1beep" path="res://chess/assets/Chess_Board.svg" id="2_neppf"]
+
+[node name="Board" type="Node2D" unique_id=1085876073]
+script = ExtResource("1_yylkj")
+metadata/_custom_type_script = "uid://ca7207qxw6070"
+
+[node name="ChessBoard" type="Sprite2D" parent="." unique_id=1809462633]
+z_index = -100
+texture = ExtResource("2_neppf")

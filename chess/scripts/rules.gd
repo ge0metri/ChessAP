@@ -83,7 +83,7 @@ static func is_valid_position(pos: Vector2i) -> bool:
 	return pos.x >= 0 and pos.x < BOARD_SIZE and pos.y >= 0 and pos.y < BOARD_SIZE
 
 static func is_move_legal(board: Board, from: Vector2i, to: Vector2i, 
-						   move_history: Array, unlocked_moves: Dictionary) -> bool:
+						   move_history: Array[MoveRecord], unlocked_moves: Dictionary) -> bool:
 	if not is_valid_position(from) or not is_valid_position(to):
 		return false
 	
@@ -110,7 +110,7 @@ static func is_move_legal(board: Board, from: Vector2i, to: Vector2i,
 	return true
 
 static func is_valid_piece_move(board: Board, from: Vector2i, to: Vector2i, 
-								 piece, move_history: Array, unlocked_moves: Dictionary) -> bool:
+								 piece, move_history: Array[MoveRecord], unlocked_moves: Dictionary) -> bool:
 	match piece.type:
 		PieceType.PAWN:
 			return is_valid_pawn_move(board, from, to, piece, move_history, unlocked_moves)
@@ -152,9 +152,9 @@ static func is_valid_piece_move(board: Board, from: Vector2i, to: Vector2i,
 # ============================================================================
 
 static func is_valid_pawn_move(board: Board, from: Vector2i, to: Vector2i, 
-								piece, move_history: Array, unlocked_moves: Dictionary) -> bool:
-	var direction = -1 if piece.color == COLOR.WHITE else 1
-	var start_rank = 6 if piece.color == COLOR.WHITE else 1
+								piece, move_history: Array[MoveRecord], unlocked_moves: Dictionary) -> bool:
+	var direction = -1 if piece.color == COLOR.BLACK else 1
+	var start_rank = 6 if piece.color == COLOR.BLACK else 1
 	var delta = to - from
 	
 	# Forward move (one square)
@@ -180,15 +180,15 @@ static func is_valid_pawn_move(board: Board, from: Vector2i, to: Vector2i,
 	return false
 
 static func is_valid_en_passant(_board: Board, from: Vector2i, to: Vector2i, 
-								 piece, move_history: Array) -> bool:
+								 piece, move_history: Array[MoveRecord]) -> bool:
 	if move_history.is_empty():
 		return false
 	
-	var last_move = move_history[-1]
-	var direction = -1 if piece.color == COLOR.WHITE else 1
+	var last_move := move_history[-1]
+	var direction = -1 if piece.color == COLOR.BLACK else 1
 	
 	# Check if last move was a pawn double-move adjacent to current pawn
-	if last_move.piece_type != PieceType.PAWN:
+	if last_move.piece.type != PieceType.PAWN:
 		return false
 	
 	if abs(last_move.from.y - last_move.to.y) != 2:
@@ -200,8 +200,11 @@ static func is_valid_en_passant(_board: Board, from: Vector2i, to: Vector2i,
 	# Check if target square is correct
 	return to.y == from.y + direction and to.x == last_move.to.x
 
+static func get_en_passant_capture_square(from: Vector2i, to: Vector2i) -> Vector2i:
+	return Vector2i(to.x, from.y)
+
 static func is_valid_king_move(board: Board, from: Vector2i, to: Vector2i, 
-								piece, move_history: Array, unlocked_moves: Dictionary) -> bool:
+								piece, move_history: Array[MoveRecord], unlocked_moves: Dictionary) -> bool:
 	var delta = to - from
 	
 	# Normal king move (one square in any direction)
@@ -216,7 +219,7 @@ static func is_valid_king_move(board: Board, from: Vector2i, to: Vector2i,
 	return false
 
 static func can_castle(board: Board, from: Vector2i, to: Vector2i, 
-						piece, _move_history: Array) -> bool:
+						piece, _move_history: Array[MoveRecord]) -> bool:
 	# King must not have moved
 	if piece.has_moved:
 		return false
